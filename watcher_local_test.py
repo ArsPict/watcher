@@ -44,9 +44,9 @@ def show_inactivity_alert(inactivity_duration):
 
 
 if __name__ == "__main__":
-    path = r'C:\MDS\WorkflowDefs'
-    app_name = "multidotscan"
-    inactivity_duration = 30
+    path = r'C:\users\arsenii\pycharmprojects\watcher'
+    app_name = "firefox"
+    inactivity_duration = 10
     observer = Observer()
     event_handler = MyHandler(timeout=inactivity_duration, reaction=lambda: show_inactivity_alert(inactivity_duration))
 
