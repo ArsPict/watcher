@@ -38,15 +38,16 @@ def is_app_running(app_name):
 def show_inactivity_alert(inactivity_duration):
     root = tk.Tk()
     root.withdraw()  # hide the main window
+    root.attributes('-topmost', True)  # make sure the alert is on top
     message = f"The folder has been inactive for the last {inactivity_duration // 60} minutes."
-    messagebox.showinfo("Folder Inactivity Alert", message)
+    messagebox.showinfo("Folder Inactivity Alert", message, parent=root)
     root.destroy()
 
 
 if __name__ == "__main__":
     path = r'C:\MDS\WorkflowDefs'
     app_name = "multidotscan"
-    inactivity_duration = 30
+    inactivity_duration = 240
     observer = Observer()
     event_handler = MyHandler(timeout=inactivity_duration, reaction=lambda: show_inactivity_alert(inactivity_duration))
 
