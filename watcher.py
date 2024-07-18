@@ -15,26 +15,28 @@ class MyHandler(FileSystemEventHandler):
         self.timeout = timeout
         self.reaction = reaction
         self.last_modified = time.time()
+        self.at_work = False
 
     def on_any_event(self, event):
         self.last_modified = time.time()
+        self.at_work = True
 
     def on_modified(self, event: FileSystemEvent) -> None:
-        print(f"Modified {event.src_path}")
+        print(f"{time.time()}: Modified {event.src_path}")
 
     def on_created(self, event: FileSystemEvent) -> None:
-        print(f"Created {event.src_path}")
+        print(f"{time.time()}: Created {event.src_path}")
 
     def on_deleted(self, event: FileSystemEvent) -> None:
-        print(f"Deleted {event.src_path}")
+        print(f"{time.time()}: Deleted {event.src_path}")
 
     def on_moved(self, event: FileSystemEvent) -> None:
-        print(f"Moved {event.src_path}")
+        print(f"{time.time()}: Moved {event.src_path}")
 
     def check_inactivity(self):
-        if time.time() - self.last_modified > self.timeout:
+        if time.time() - self.last_modified > self.timeout and self.at_work:
             self.reaction()
-            self.last_modified = time.time()  # reset to avoid continuous triggering
+            self.at_work = False
 
 
 def is_app_running(app_name):
