@@ -4,10 +4,12 @@ import tkinter as tk
 from tkinter import messagebox
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, FileSystemEvent
+from datetime import datetime
 
 #Constants
 path = r'C:\MDS\WorkflowDefs'
 app_name = "multidotscan"
+inactivity_duration = 300
 
 
 class MyHandler(FileSystemEventHandler):
@@ -22,16 +24,20 @@ class MyHandler(FileSystemEventHandler):
         self.at_work = True
 
     def on_modified(self, event: FileSystemEvent) -> None:
-        print(f"{time.time()}: Modified {event.src_path}")
+        current_time = datetime.now.strftime("%H:%M:%S")
+        print(f"{current_time}: Modified {event.src_path}")
 
     def on_created(self, event: FileSystemEvent) -> None:
-        print(f"{time.time()}: Created {event.src_path}")
+        current_time = datetime.now.strftime("%H:%M:%S")
+        print(f"{current_time}: Created {event.src_path}")
 
     def on_deleted(self, event: FileSystemEvent) -> None:
-        print(f"{time.time()}: Deleted {event.src_path}")
+        current_time = datetime.now.strftime("%H:%M:%S")
+        print(f"{current_time}: Deleted {event.src_path}")
 
     def on_moved(self, event: FileSystemEvent) -> None:
-        print(f"{time.time()}: Moved {event.src_path}")
+        current_time = datetime.now.strftime("%H:%M:%S")
+        print(f"{current_time}: Moved {event.src_path}")
 
     def check_inactivity(self):
         if time.time() - self.last_modified > self.timeout and self.at_work:
@@ -57,13 +63,14 @@ def show_inactivity_alert(inactivity_duration):
     root = tk.Tk()
     root.withdraw()  # hide the main window
     root.attributes('-topmost', True)  # make sure the alert is on top
-    message = f"The scanner has been inactive for the last {inactivity_duration // 60} minutes."
-    messagebox.showinfo("Folder Inactivity Alert", message, parent=root)
+    message = f"""
+            The scanner has been inactive for the last {inactivity_duration // 60} minutes.
+            Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben."""
+    messagebox.showinfo("Scanner Inactivity Alert", message, parent=root)
     root.destroy()
 
 
 if __name__ == "__main__":
-    inactivity_duration = 240
     observer = Observer()
     event_handler = MyHandler(timeout=inactivity_duration, reaction=lambda: show_inactivity_alert(inactivity_duration))
 
