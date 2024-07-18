@@ -5,7 +5,6 @@ from tkinter import messagebox
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, FileSystemEvent
 from datetime import datetime
-import datetime
 
 #Constants
 path = r'C:\MDS\WorkflowDefs'
