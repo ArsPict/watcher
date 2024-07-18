@@ -3,7 +3,11 @@ import psutil
 import tkinter as tk
 from tkinter import messagebox
 from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
+from watchdog.events import FileSystemEventHandler, FileSystemEvent
+
+#Constants
+path = r'C:\MDS\WorkflowDefs'
+app_name = "multidotscan"
 
 
 class MyHandler(FileSystemEventHandler):
@@ -14,6 +18,18 @@ class MyHandler(FileSystemEventHandler):
 
     def on_any_event(self, event):
         self.last_modified = time.time()
+
+    def on_modified(self, event: FileSystemEvent) -> None:
+        print(f"Modified {event.src_path}")
+
+    def on_created(self, event: FileSystemEvent) -> None:
+        print(f"Created {event.src_path}")
+
+    def on_deleted(self, event: FileSystemEvent) -> None:
+        print(f"Deleted {event.src_path}")
+
+    def on_moved(self, event: FileSystemEvent) -> None:
+        print(f"Moved {event.src_path}")
 
     def check_inactivity(self):
         if time.time() - self.last_modified > self.timeout:
@@ -39,14 +55,12 @@ def show_inactivity_alert(inactivity_duration):
     root = tk.Tk()
     root.withdraw()  # hide the main window
     root.attributes('-topmost', True)  # make sure the alert is on top
-    message = f"The folder has been inactive for the last {inactivity_duration // 60} minutes."
+    message = f"The scanner has been inactive for the last {inactivity_duration // 60} minutes."
     messagebox.showinfo("Folder Inactivity Alert", message, parent=root)
     root.destroy()
 
 
 if __name__ == "__main__":
-    path = r'C:\MDS\WorkflowDefs'
-    app_name = "multidotscan"
     inactivity_duration = 240
     observer = Observer()
     event_handler = MyHandler(timeout=inactivity_duration, reaction=lambda: show_inactivity_alert(inactivity_duration))
