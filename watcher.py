@@ -5,6 +5,7 @@ from tkinter import messagebox
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, FileSystemEvent
 from datetime import datetime
+import datetime
 
 #Constants
 path = r'C:\MDS\WorkflowDefs'
@@ -24,19 +25,19 @@ class MyHandler(FileSystemEventHandler):
         self.at_work = True
 
     def on_modified(self, event: FileSystemEvent) -> None:
-        current_time = datetime.now.strftime("%H:%M:%S")
+        current_time = datetime.now().strftime("%H:%M:%S")
         print(f"{current_time}: Modified {event.src_path}")
 
     def on_created(self, event: FileSystemEvent) -> None:
-        current_time = datetime.now.strftime("%H:%M:%S")
+        current_time = datetime.now().strftime("%H:%M:%S")
         print(f"{current_time}: Created {event.src_path}")
 
     def on_deleted(self, event: FileSystemEvent) -> None:
-        current_time = datetime.now.strftime("%H:%M:%S")
+        current_time = datetime.now().strftime("%H:%M:%S")
         print(f"{current_time}: Deleted {event.src_path}")
 
     def on_moved(self, event: FileSystemEvent) -> None:
-        current_time = datetime.now.strftime("%H:%M:%S")
+        current_time = datetime.now().strftime("%H:%M:%S")
         print(f"{current_time}: Moved {event.src_path}")
 
     def check_inactivity(self):
