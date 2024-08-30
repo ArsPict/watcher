@@ -6,18 +6,21 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, FileSystemEvent
 from datetime import datetime
 import requests
+import signal
+import sys
 
 
 #Constants
 path = r'C:\MDS\WorkflowDefs'
 app_name = "multidotscan"
-inactivity_duration = 300
+inactivity_duration = 120
 
 #token and key for the pushover service
 USER_KEY = 'unm6h553h251f8upmssx5p5rbem881'
 APP_TOKEN = 'ac4b78642pz97vcifowhe4bmorpz6w'
 
 def send_pushover_notification(message):
+    message = "test notification, please ignore \n" + message #temporary
     url = "https://api.pushover.net/1/messages.json"
     data = {
         'token': APP_TOKEN,
@@ -88,8 +91,9 @@ def inactivity_alert(last_modified):
 def inactivity_message(last_modified, ):
     inactivity_duration = time.time() - last_modified
     message = f"""
-                Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben.
-                Inaktivitätsbegin: {last_modified}"""
+                    Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben.
+                    Inaktivitätsbegin: {datetime.fromtimestamp(last_modified).strftime('%Y-%m-%d %H:%M:%S')}"""
+    return message
 
 
 def inactivity_pop_up(last_modified):
@@ -104,7 +108,17 @@ def inactivity_pop_up(last_modified):
     root.destroy()
 
 
+def signal_handler(sig, frame):
+    message = f"Script was stopped by signal {sig} at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}."
+    send_pushover_notification(message)
+    print("Shutting down...")
+    sys.exit(0)
+
+
 if __name__ == "__main__":
+    signal.signal(signal.SIGINT, signal_handler)  # Handle Ctrl+C
+    signal.signal(signal.SIGTERM, signal_handler)  # Handle termination signal
+
     observer = Observer()
     event_handler = MyHandler(timeout=inactivity_duration, reaction=lambda: inactivity_alert(inactivity_duration))
 
@@ -130,8 +144,9 @@ if __name__ == "__main__":
                 event_handler.check_inactivity()
 
             time.sleep(5)  # Check every 5 seconds
-
     except KeyboardInterrupt:
+        signal_handler(signal.SIGINT, None)
+    finally:
         if observer_started:
             observer.stop()
             observer.join()
