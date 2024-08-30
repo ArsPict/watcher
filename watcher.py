@@ -5,11 +5,30 @@ from tkinter import messagebox
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, FileSystemEvent
 from datetime import datetime
+import requests
+
 
 #Constants
 path = r'C:\MDS\WorkflowDefs'
 app_name = "multidotscan"
 inactivity_duration = 300
+
+#token and key for the pushover service
+USER_KEY = 'unm6h553h251f8upmssx5p5rbem881'
+APP_TOKEN = 'ac4b78642pz97vcifowhe4bmorpz6w'
+
+def send_pushover_notification(message):
+    url = "https://api.pushover.net/1/messages.json"
+    data = {
+        'token': APP_TOKEN,
+        'user': USER_KEY,
+        'message': message
+    }
+    response = requests.post(url, data=data)
+    if response.status_code == 200:
+        print("Notification sent successfully")
+    else:
+        print(f"Failed to send notification: {response.text}")
 
 
 class MyHandler(FileSystemEventHandler):
@@ -18,14 +37,16 @@ class MyHandler(FileSystemEventHandler):
         self.reaction = reaction
         self.last_modified = time.time()
         self.at_work = False
+        self.hms_time = datetime.now().strftime("%H:%M:%S")
 
     def on_any_event(self, event):
         self.last_modified = time.time()
         self.at_work = True
+        self.hms_time = datetime.now().strftime("%H:%M:%S")
 
     def on_modified(self, event: FileSystemEvent) -> None:
         current_time = datetime.now().strftime("%H:%M:%S")
-        print(f"{current_time}: Modified {event.src_path}")
+        print(f"{current_time}: Created {event.src_path}")
 
     def on_created(self, event: FileSystemEvent) -> None:
         current_time = datetime.now().strftime("%H:%M:%S")
@@ -59,20 +80,33 @@ def is_app_running(app_name):
     return False
 
 
-def show_inactivity_alert(inactivity_duration):
+def inactivity_alert(last_modified):
+    send_pushover_notification(inactivity_message(last_modified))
+    inactivity_pop_up(last_modified)
+
+
+def inactivity_message(last_modified, ):
+    inactivity_duration = time.time() - last_modified
+    message = f"""
+                Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben.
+                Inaktivitätsbegin: {last_modified}"""
+
+
+def inactivity_pop_up(last_modified):
+    inactivity_duration = time.time() - last_modified
     root = tk.Tk()
     root.withdraw()  # hide the main window
     root.attributes('-topmost', True)  # make sure the alert is on top
     message = f"""
-            The scanner has been inactive for the last {inactivity_duration // 60} minutes.
-            Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben."""
+                The scanner has been inactive for the last {inactivity_duration // 60} minutes.
+                Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben."""
     messagebox.showinfo("Scanner Inactivity Alert", message, parent=root)
     root.destroy()
 
 
 if __name__ == "__main__":
     observer = Observer()
-    event_handler = MyHandler(timeout=inactivity_duration, reaction=lambda: show_inactivity_alert(inactivity_duration))
+    event_handler = MyHandler(timeout=inactivity_duration, reaction=lambda: inactivity_alert(inactivity_duration))
 
     observer_started = False
 
