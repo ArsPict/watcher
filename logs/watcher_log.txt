@@ -1,0 +1,196 @@
+2024-09-04 11:58:05,112 - Service has started.
+2024-09-04 11:58:05,905 - Started monitoring C:\Users\Arsenii\pascal_projects because pascalABC.NET is running.
+2024-09-04 11:58:05,905 - inactivity begin: 11:58:05, not at work
+2024-09-04 11:58:11,282 - inactivity begin: 11:58:05, not at work
+2024-09-04 11:58:15,484 - 11:58:15: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 11:58:15,484 - 11:58:15: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 11:58:16,756 - inactivity begin: 11:58:15, time till alert: 13.73
+2024-09-04 11:58:22,302 - inactivity begin: 11:58:15, time till alert: 8.18
+2024-09-04 11:58:27,689 - inactivity begin: 11:58:15, time till alert: 2.80
+2024-09-04 11:58:43,118 - the scanner is idle, notification sent
+2024-09-04 11:58:48,509 - inactivity begin: 11:58:15, not at work
+2024-09-04 11:58:53,914 - inactivity begin: 11:58:15, not at work
+2024-09-04 11:58:59,295 - inactivity begin: 11:58:15, not at work
+2024-09-04 11:59:04,633 - 11:59:04: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 11:59:04,649 - 11:59:04: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 11:59:04,688 - inactivity begin: 11:59:04, time till alert: 14.96
+2024-09-04 11:59:10,078 - inactivity begin: 11:59:04, time till alert: 9.57
+2024-09-04 11:59:15,480 - inactivity begin: 11:59:04, time till alert: 4.17
+2024-09-04 11:59:30,990 - the scanner is idle, notification sent
+2024-09-04 11:59:36,375 - inactivity begin: 11:59:04, not at work
+2024-09-04 11:59:42,023 - inactivity begin: 11:59:04, not at work
+2024-09-04 11:59:47,410 - inactivity begin: 11:59:04, not at work
+2024-09-04 11:59:52,799 - inactivity begin: 11:59:04, not at work
+2024-09-04 11:59:58,186 - inactivity begin: 11:59:04, not at work
+2024-09-04 12:00:03,573 - inactivity begin: 11:59:04, not at work
+2024-09-04 12:00:08,956 - inactivity begin: 11:59:04, not at work
+2024-09-04 12:00:14,334 - inactivity begin: 11:59:04, not at work
+2024-09-04 12:00:19,716 - inactivity begin: 11:59:04, not at work
+2024-09-04 12:00:25,094 - inactivity begin: 11:59:04, not at work
+2024-09-04 12:00:30,177 - Shutting down...
+2024-09-04 12:00:30,177 - Observer has been shut down
+2024-09-04 12:17:05,908 - Service has started.
+2024-09-04 12:17:06,617 - Started monitoring C:\Users\Arsenii\pascal_projects because pascalABC.NET is running.
+2024-09-04 12:17:06,617 - inactivity begin: 12:17:06, not at work
+2024-09-04 12:17:10,102 - 12:17:10: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 12:17:10,103 - 12:17:10: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 12:17:11,976 - inactivity begin: 12:17:10, time till alert: 13.13
+2024-09-04 12:17:17,328 - inactivity begin: 12:17:10, time till alert: 7.77
+2024-09-04 12:17:22,697 - inactivity begin: 12:17:10, time till alert: 2.41
+2024-09-04 12:17:31,705 - the scanner is idle, notification sent
+2024-09-04 12:17:37,078 - inactivity begin: 12:17:10, not at work
+2024-09-04 12:17:42,446 - inactivity begin: 12:17:10, not at work
+2024-09-04 12:17:47,802 - inactivity begin: 12:17:10, not at work
+2024-09-04 12:17:53,174 - inactivity begin: 12:17:10, not at work
+2024-09-04 12:17:58,535 - inactivity begin: 12:17:10, not at work
+2024-09-04 12:18:00,136 - Shutting down...
+2024-09-04 12:18:00,136 - Observer has been shut down
+2024-09-04 13:28:23,933 - Service has started.
+2024-09-04 13:28:24,722 - Started monitoring C:\Users\Arsenii\pascal_projects because pascalABC.NET is running.
+2024-09-04 13:28:24,722 - inactivity begin: 13:28:24, not at work
+2024-09-04 13:28:28,977 - 13:28:28: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 13:28:28,977 - 13:28:28: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 13:28:30,165 - inactivity begin: 13:28:28, time till alert: 13.81
+2024-09-04 13:28:35,560 - inactivity begin: 13:28:28, time till alert: 8.42
+2024-09-04 13:28:40,952 - inactivity begin: 13:28:28, time till alert: 3.03
+2024-09-04 13:28:47,122 - Inactivity notification triggered at Wed Sep  4 13:28:47 2024
+2024-09-04 13:28:47,123 - the scanner is idle, notification sent
+2024-09-04 13:28:52,524 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:28:57,912 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:29:03,334 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:29:08,728 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:29:14,139 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:29:19,526 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:29:24,953 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:29:30,365 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:29:35,774 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:29:41,180 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:29:46,582 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:29:52,000 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:29:57,416 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:30:02,813 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:30:08,217 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:30:13,616 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:30:18,988 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:30:24,389 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:30:29,808 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:30:35,186 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:30:40,590 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:30:45,985 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:30:51,629 - inactivity begin: 13:28:28, not at work
+2024-09-04 13:30:57,786 - Shutting down...
+2024-09-04 13:30:57,786 - Observer has been shut down
+2024-09-04 13:30:59,518 - Service has started.
+2024-09-04 13:31:00,429 - Started monitoring C:\Users\Arsenii\pascal_projects because pascalABC.NET is running.
+2024-09-04 13:31:00,429 - inactivity begin: 13:31:00, not at work
+2024-09-04 13:31:01,840 - 13:31:01: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 13:31:01,840 - 13:31:01: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 13:31:05,811 - inactivity begin: 13:31:01, time till alert: 11.03
+2024-09-04 13:31:11,199 - inactivity begin: 13:31:01, time till alert: 5.64
+2024-09-04 13:31:16,579 - inactivity begin: 13:31:01, time till alert: 0.26
+2024-09-04 13:31:22,379 - Inactivity notification triggered at Wed Sep  4 13:31:22 2024
+2024-09-04 13:31:22,379 - the scanner is idle, notification sent
+2024-09-04 13:31:27,773 - inactivity begin: 13:31:01, not at work
+2024-09-04 13:31:33,178 - inactivity begin: 13:31:01, not at work
+2024-09-04 13:31:38,565 - inactivity begin: 13:31:01, not at work
+2024-09-04 13:31:44,007 - inactivity begin: 13:31:01, not at work
+2024-09-04 13:31:49,399 - inactivity begin: 13:31:01, not at work
+2024-09-04 13:31:54,854 - inactivity begin: 13:31:01, not at work
+2024-09-04 13:31:56,706 - Shutting down...
+2024-09-04 13:31:56,707 - Observer has been shut down
+2024-09-04 13:32:47,533 - Service has started.
+2024-09-04 13:32:48,434 - Started monitoring C:\Users\Arsenii\pascal_projects because pascalABC.NET is running.
+2024-09-04 13:32:48,434 - inactivity begin: 13:32:48, not at work
+2024-09-04 13:32:51,968 - 13:32:51: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 13:32:51,968 - 13:32:51: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 13:32:53,888 - inactivity begin: 13:32:51, time till alert: 13.08
+2024-09-04 13:32:59,329 - inactivity begin: 13:32:51, time till alert: 7.64
+2024-09-04 13:33:04,752 - inactivity begin: 13:32:51, time till alert: 2.22
+2024-09-04 13:33:10,994 - Inactivity notification triggered at Wed Sep  4 13:33:10 2024
+2024-09-04 13:33:10,994 - the scanner is idle, notification sent
+2024-09-04 13:33:16,414 - inactivity begin: 13:32:51, not at work
+2024-09-04 13:33:21,909 - inactivity begin: 13:32:51, not at work
+2024-09-04 13:33:27,370 - inactivity begin: 13:32:51, not at work
+2024-09-04 13:33:32,836 - inactivity begin: 13:32:51, not at work
+2024-09-04 13:33:35,148 - Shutting down...
+2024-09-04 13:33:35,149 - Observer has been shut down
+2024-09-04 13:35:00,705 - Service has started.
+2024-09-04 13:35:01,495 - Started monitoring C:\Users\Arsenii\pascal_projects because pascalABC.NET is running.
+2024-09-04 13:35:01,495 - inactivity begin: 13:35:01, not at work
+2024-09-04 13:35:06,890 - inactivity begin: 13:35:01, not at work
+2024-09-04 13:35:12,286 - inactivity begin: 13:35:01, not at work
+2024-09-04 13:35:17,697 - inactivity begin: 13:35:01, not at work
+2024-09-04 13:35:21,544 - 13:35:21: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 13:35:21,544 - 13:35:21: Modified C:\Users\Arsenii\pascal_projects\new_project.pas
+2024-09-04 13:35:23,152 - inactivity begin: 13:35:21, time till alert: 13.39
+2024-09-04 13:35:28,577 - inactivity begin: 13:35:21, time till alert: 7.97
+2024-09-04 13:35:33,979 - inactivity begin: 13:35:21, time till alert: 2.57
+2024-09-04 13:35:40,285 - Inactivity notification triggered at Wed Sep  4 13:35:40 2024
+2024-09-04 13:35:40,285 - the scanner is idle, notification sent
+2024-09-04 13:35:45,704 - inactivity begin: 13:35:21, not at work
+2024-09-04 13:35:51,106 - inactivity begin: 13:35:21, not at work
+2024-09-04 13:35:56,503 - inactivity begin: 13:35:21, not at work
+2024-09-04 13:36:01,900 - inactivity begin: 13:35:21, not at work
+2024-09-04 13:36:07,283 - inactivity begin: 13:35:21, not at work
+2024-09-04 13:36:12,667 - inactivity begin: 13:35:21, not at work
+2024-09-04 13:36:18,109 - inactivity begin: 13:35:21, not at work
+2024-09-04 13:36:23,589 - inactivity begin: 13:35:21, not at work
+2024-09-04 13:36:25,470 - Shutting down...
+2024-09-04 13:36:25,471 - Observer has been shut down
+2024-09-04 14:08:56,297 - Service has started.
+2024-09-04 14:08:56,960 - Started monitoring C:/Users/Arsenii/pascal_projects because pascalABC.NET is running.
+2024-09-04 14:08:56,960 - inactivity begin: 14:08:56, not at work
+2024-09-04 14:09:02,269 - inactivity begin: 14:08:56, not at work
+2024-09-04 14:09:05,088 - Shutting down...
+2024-09-04 14:09:05,088 - Observer has been shut down
+2024-09-04 14:11:16,825 - Service has started.
+2024-09-04 14:11:17,436 - Started monitoring C:/Users/Arsenii/pascal_projects because pascalABC.NET is running.
+2024-09-04 14:11:17,436 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:11:22,747 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:11:28,071 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:11:33,448 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:11:38,859 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:11:44,185 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:11:49,512 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:11:54,830 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:12:00,154 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:12:05,561 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:12:10,882 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:12:16,202 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:12:21,523 - inactivity begin: 14:11:17, not at work
+2024-09-04 14:12:25,872 - Shutting down...
+2024-09-04 14:12:25,873 - Observer has been shut down
+2024-09-04 14:16:02,124 - Service has started.
+2024-09-04 14:16:02,795 - Started monitoring C:/Users/Arsenii/pascal_projects because pascalABC.NET is running.
+2024-09-04 14:16:02,795 - inactivity begin: 14:16:02, not at work
+2024-09-04 14:16:08,155 - inactivity begin: 14:16:02, not at work
+2024-09-04 14:16:13,231 - 14:16:13: Modified C:/Users/Arsenii/pascal_projects\new_project.pas
+2024-09-04 14:16:13,262 - 14:16:13: Modified C:/Users/Arsenii/pascal_projects\new_project.pas
+2024-09-04 14:16:13,522 - inactivity begin: 14:16:13, time till alert: 14.74
+2024-09-04 14:16:18,907 - inactivity begin: 14:16:13, time till alert: 9.35
+2024-09-04 14:16:24,239 - inactivity begin: 14:16:13, time till alert: 4.02
+2024-09-04 14:16:30,463 - Inactivity notification triggered at Wed Sep  4 14:16:30 2024
+2024-09-04 14:16:30,463 - the scanner is idle, notification sent
+2024-09-04 14:16:35,804 - inactivity begin: 14:16:13, not at work
+2024-09-04 14:16:41,156 - inactivity begin: 14:16:13, not at work
+2024-09-04 14:16:46,541 - inactivity begin: 14:16:13, not at work
+2024-09-04 14:16:51,964 - inactivity begin: 14:16:13, not at work
+2024-09-04 14:16:57,364 - inactivity begin: 14:16:13, not at work
+2024-09-04 14:17:02,799 - inactivity begin: 14:16:13, not at work
+2024-09-04 14:17:08,229 - inactivity begin: 14:16:13, not at work
+2024-09-04 14:17:13,442 - Shutting down...
+2024-09-04 14:17:13,443 - Observer has been shut down
+2024-09-04 14:25:32,383 - Service has started.
+2024-09-04 14:25:33,075 - Started monitoring C:/Users/Arsenii/pascal_projects because pascalABC.NET is running.
+2024-09-04 14:25:33,075 - inactivity begin: 14:25:33, not at work
+2024-09-04 14:25:38,419 - inactivity begin: 14:25:33, not at work
+2024-09-04 14:25:39,866 - 14:25:39: Modified C:/Users/Arsenii/pascal_projects\new_project.pas
+2024-09-04 14:25:39,866 - 14:25:39: Modified C:/Users/Arsenii/pascal_projects\new_project.pas
+2024-09-04 14:25:43,768 - inactivity begin: 14:25:39, time till alert: 11.10
+2024-09-04 14:25:49,115 - inactivity begin: 14:25:39, time till alert: 5.75
+2024-09-04 14:25:54,462 - inactivity begin: 14:25:39, time till alert: 0.40
+2024-09-04 14:26:00,583 - Inactivity notification triggered at Wed Sep  4 14:26:00 2024
+2024-09-04 14:26:00,583 - the scanner is idle, notification sent
+2024-09-04 14:26:06,064 - inactivity begin: 14:25:39, not at work
+2024-09-04 14:26:07,439 - Shutting down...
+2024-09-04 14:26:07,440 - Observer has been shut down

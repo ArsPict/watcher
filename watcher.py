@@ -1,7 +1,5 @@
 import time
 import psutil
-import tkinter as tk
-from tkinter import messagebox
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, FileSystemEvent
 from datetime import datetime
@@ -10,8 +8,9 @@ import signal
 import sys
 import logging
 from win10toast import ToastNotifier
+import subprocess
+from config_setup import setup_config
 notifier = ToastNotifier()
-
 
 # Configure logging
 logging.basicConfig(
@@ -21,22 +20,27 @@ logging.basicConfig(
 )
 
 
-#Constants
-#path = r'C:\MDS\WorkflowDefs'
-#app_name = "multidotscan"
+try:
+    paths, app_settings, pushover_credentials = setup_config()
+    path = paths['path']
+    message_file = paths['message_file']
+    inactivity_duration = app_settings['inactivity_duration']
+    app_name = app_settings['app_name']
+    USER_KEY = pushover_credentials['USER_KEY']
+    APP_TOKEN = pushover_credentials['APP_TOKEN']
+    # Access the constants
+    print("Paths:", paths)
+    print("App Settings:", app_settings)
+    #print("Pushover Credentials:", pushover_credentials)
 
-path = r'C:\Users\Arsenii\pascal_projects'
-app_name = "pascalABC.NET"
-inactivity_duration = 15
+except Exception as e:
+    print(f"Error: {str(e)}")
 
-# token and key for the pushover service
-USER_KEY = 'unm6h553h251f8upmssx5p5rbem881'
-APP_TOKEN = 'ac4b78642pz97vcifowhe4bmorpz6w'
 
 def send_pushover_notification(message):
     message = "test notification, please ignore \n" + message  # temporary
-    print(f"message sent kwasi: {message}")                    # temporary
-    '''url = "https://api.pushover.net/1/messages.json"
+    print(f"message sent kwasi: {message}")  # temporary
+    url = "https://api.pushover.net/1/messages.json"
     data = {
         'token': APP_TOKEN,
         'user': USER_KEY,
@@ -47,7 +51,11 @@ def send_pushover_notification(message):
         print("Notification sent successfully")
     else:
         print(f"Failed to send notification: {response.text}")
-    '''
+
+
+def write_message_file(message):
+    with open(message_file, "w") as file:
+        file.write(message)
 
 
 class MyHandler(FileSystemEventHandler):
@@ -138,33 +146,14 @@ def inactivity_pop_up(last_modified):
     message = f"""
                     The scanner has been inactive for the last {inactivity_duration // 60} minutes.
                     Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben."""
+    write_message_file(message)
     try:
-        notifier.show_toast("Scanner Inactivity Alert", message, duration=10)
-    except Exception as e:
-        logging.basicConfig(filename='error_log.log',
-                            level=logging.ERROR,
-                            format='%(asctime)s - %(levelname)s - %(message)s')
-        logging.error("Error displaying toast notification", exc_info=True)
-    finally:
-        logging.basicConfig(
-            filename=r".\logs\watcher_log.txt",
-            level=logging.INFO,
-            format="%(asctime)s - %(message)s"
-        )
+        # Trigger the Windows Task Scheduler to run the task
+        subprocess.run(['schtasks', '/run', '/tn', 'pop_up_for_watcher'], check=True)
+        logging.info("Inactivity notification triggered at %s", time.ctime())
+    except subprocess.CalledProcessError as e:
+        logging.error("Error triggering Task Scheduler: %s", str(e))
 
-
-"""
-    def inactivity_pop_up(last_modified):
-    inactivity_duration = time.time() - last_modified
-    root = tk.Tk()
-    root.withdraw()  # hide the main window
-    root.attributes('-topmost', True)  # make sure the alert is on top
-    message = (f""
-               f"The scanner has been inactive for the last {inactivity_duration // 60} minutes.\n"
-               f"Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben.")
-    messagebox.showinfo("Scanner Inactivity Alert", message, parent=root)
-    root.destroy()
-"""
 
 def signal_handler(sig, frame):
     message = f"Script was stopped by signal {sig} at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}."
