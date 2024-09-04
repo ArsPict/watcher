@@ -15,13 +15,14 @@ path = r'C:\MDS\WorkflowDefs'
 app_name = "multidotscan"
 inactivity_duration = 120
 
-#token and key for the pushover service
+# token and key for the pushover service
 USER_KEY = 'unm6h553h251f8upmssx5p5rbem881'
 APP_TOKEN = 'ac4b78642pz97vcifowhe4bmorpz6w'
 
 def send_pushover_notification(message):
-    message = "test notification, please ignore \n" + message #temporary
-    url = "https://api.pushover.net/1/messages.json"
+    message = "test notification, please ignore \n" + message  # temporary
+    print(f"message sent kwasi: {message}")                    # temporary
+    '''url = "https://api.pushover.net/1/messages.json"
     data = {
         'token': APP_TOKEN,
         'user': USER_KEY,
@@ -32,6 +33,7 @@ def send_pushover_notification(message):
         print("Notification sent successfully")
     else:
         print(f"Failed to send notification: {response.text}")
+    '''
 
 
 class MyHandler(FileSystemEventHandler):
@@ -67,6 +69,11 @@ class MyHandler(FileSystemEventHandler):
         if time.time() - self.last_modified > self.timeout and self.at_work:
             self.reaction()
             self.at_work = False
+            print("the scanner is idle, notification sent")
+        else:
+            print(f""
+                  f"inactivity begin: {datetime.fromtimestamp(self.last_modified).strftime('%H:%M:%S')},"
+                  f"time till alert: {(self.timeout - time.time() + self.last_modified):.2f}")
 
 
 def is_app_running(app_name):
@@ -88,7 +95,7 @@ def inactivity_alert(last_modified):
     inactivity_pop_up(last_modified)
 
 
-def inactivity_message(last_modified, ):
+def inactivity_message(last_modified):
     inactivity_duration = time.time() - last_modified
     message = f"""
                     Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben.
@@ -120,7 +127,8 @@ if __name__ == "__main__":
     signal.signal(signal.SIGTERM, signal_handler)  # Handle termination signal
 
     observer = Observer()
-    event_handler = MyHandler(timeout=inactivity_duration, reaction=lambda: inactivity_alert(inactivity_duration))
+    event_handler = MyHandler(timeout=inactivity_duration,
+                              reaction=lambda: inactivity_alert(event_handler.last_modified))
 
     observer_started = False
 
