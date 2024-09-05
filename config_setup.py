@@ -30,27 +30,28 @@ def setup_config():
         'inactivity_duration': config.getint('App', 'inactivity_duration')
     }
 
-    pushover_credentials = {
+    pushover = {
         'USER_KEY': config.get('Pushover', 'USER_KEY'),
-        'APP_TOKEN': config.get('Pushover', 'APP_TOKEN')
+        'APP_TOKEN': config.get('Pushover', 'APP_TOKEN'),
+        'send_notification': config.get('Pushover', 'send_notification')
     }
 
     scanner = {
         'name': config.get('Scanner', 'name')
     }
 
-    return paths, app_settings, pushover_credentials, scanner
+    return paths, app_settings, pushover, scanner
 
 
 # Example usage
 if __name__ == "__main__":
     try:
-        paths, app_settings, pushover_credentials = setup_config()
+        paths, app_settings, pushover, scanner = setup_config()
 
         # Access the constants
         print("Paths:", paths)
         print("App Settings:", app_settings)
-        print("Pushover Credentials:", pushover_credentials)
+        print("Pushover:", pushover)
 
     except Exception as e:
         print(f"Error: {str(e)}")

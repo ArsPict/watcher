@@ -101,7 +101,7 @@ class MyHandler(FileSystemEventHandler):
         if time.time() - self.last_modified > self.timeout and self.at_work:
             self.reaction()
             self.at_work = False
-            m = "the scanner is idle, notification sent"
+            m = "the scanner is idle"
             print(m)
             logging.info(m)
         else:
