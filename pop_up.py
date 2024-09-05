@@ -4,7 +4,7 @@ import os
 from config_setup import setup_config
 
 
-paths, app_settings, pushover_credentials = setup_config()
+paths, app_settings, pushover_credentials, scanner = setup_config()
 path = paths['path']
 message_file = paths['message_file']
 

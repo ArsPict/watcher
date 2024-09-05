@@ -21,13 +21,14 @@ logging.basicConfig(
 )
 
 try:
-    paths, app_settings, pushover_credentials, scanner_info = setup_config()
+    paths, app_settings, pushover, scanner_info = setup_config()
     path = paths['path']
     message_file = paths['message_file']
     inactivity_duration = app_settings['inactivity_duration']
     app_name = app_settings['app_name']
-    USER_KEY = pushover_credentials['USER_KEY']
-    APP_TOKEN = pushover_credentials['APP_TOKEN']
+    USER_KEY = pushover['USER_KEY']
+    APP_TOKEN = pushover['APP_TOKEN']
+    send_notification = bool(int(pushover['send_notification']))
     scanner_name = scanner_info['name']
     # Access the constants
     print("Paths:", paths)
@@ -41,17 +42,17 @@ except Exception as e:
 def send_pushover_notification(message):
     message = "test notification, please ignore \n" + message  # temporary
     print(f"message sent: {message}")  # temporary
-    # url = "https://api.pushover.net/1/messages.json"
-    # data = {
-    #     'token': APP_TOKEN,
-    #     'user': USER_KEY,
-    #     'message': message
-    # }
-    # response = requests.post(url, data=data)
-    # if response.status_code == 200:
-    #     print("Notification sent successfully")
-    # else:
-    #     print(f"Failed to send notification: {response.text}")
+    url = "https://api.pushover.net/1/messages.json"
+    data = {
+        'token': APP_TOKEN,
+        'user': USER_KEY,
+        'message': message
+    }
+    response = requests.post(url, data=data)
+    if response.status_code == 200:
+        print("Notification sent successfully")
+    else:
+        print(f"Failed to send notification: {response.text}")
 
 
 def write_message_file(message):
@@ -130,7 +131,8 @@ def is_app_running(app_name):
 
 
 def inactivity_alert(last_modified):
-    send_pushover_notification(inactivity_message(last_modified))
+    if(send_notification):
+        send_pushover_notification(inactivity_message(last_modified))
     inactivity_pop_up(last_modified)
 
 
@@ -194,6 +196,7 @@ if __name__ == "__main__":
                     observer.stop()
                     observer.join()
                     observer_started = False
+                    event_handler.at_work = False
                     logging.info(f"Stopped monitoring {path} because {app_name} is not running.")
                     print(f"Stopped monitoring {path} because {app_name} is not running.")
             if observer_started:
