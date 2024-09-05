@@ -7,10 +7,6 @@ from config_setup import setup_config
 paths, app_settings, pushover_credentials = setup_config()
 path = paths['path']
 message_file = paths['message_file']
-inactivity_duration = app_settings['inactivity_duration']
-app_name = app_settings['app_name']
-USER_KEY = pushover_credentials['USER_KEY']
-APP_TOKEN = pushover_credentials['APP_TOKEN']
 
 
 def show_pop_up(message):

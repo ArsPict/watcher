@@ -10,6 +10,7 @@ import logging
 from win10toast import ToastNotifier
 import subprocess
 from config_setup import setup_config
+
 notifier = ToastNotifier()
 
 # Configure logging
@@ -19,15 +20,15 @@ logging.basicConfig(
     format="%(asctime)s - %(message)s"
 )
 
-
 try:
-    paths, app_settings, pushover_credentials = setup_config()
+    paths, app_settings, pushover_credentials, scanner_info = setup_config()
     path = paths['path']
     message_file = paths['message_file']
     inactivity_duration = app_settings['inactivity_duration']
     app_name = app_settings['app_name']
     USER_KEY = pushover_credentials['USER_KEY']
     APP_TOKEN = pushover_credentials['APP_TOKEN']
+    scanner_name = scanner_info['name']
     # Access the constants
     print("Paths:", paths)
     print("App Settings:", app_settings)
@@ -39,18 +40,18 @@ except Exception as e:
 
 def send_pushover_notification(message):
     message = "test notification, please ignore \n" + message  # temporary
-    print(f"message sent kwasi: {message}")  # temporary
-    url = "https://api.pushover.net/1/messages.json"
-    data = {
-        'token': APP_TOKEN,
-        'user': USER_KEY,
-        'message': message
-    }
-    response = requests.post(url, data=data)
-    if response.status_code == 200:
-        print("Notification sent successfully")
-    else:
-        print(f"Failed to send notification: {response.text}")
+    print(f"message sent: {message}")  # temporary
+    # url = "https://api.pushover.net/1/messages.json"
+    # data = {
+    #     'token': APP_TOKEN,
+    #     'user': USER_KEY,
+    #     'message': message
+    # }
+    # response = requests.post(url, data=data)
+    # if response.status_code == 200:
+    #     print("Notification sent successfully")
+    # else:
+    #     print(f"Failed to send notification: {response.text}")
 
 
 def write_message_file(message):
@@ -135,17 +136,17 @@ def inactivity_alert(last_modified):
 
 def inactivity_message(last_modified):
     inactivity_duration = time.time() - last_modified
-    message = f"""
-                    Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben.
-                    Inaktivitätsbegin: {datetime.fromtimestamp(last_modified).strftime('%Y-%m-%d %H:%M:%S')}"""
+    message = scanner_name + "\n"
+    message += (f"Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben.\n"
+               f"Inaktivitätsbegin: {datetime.fromtimestamp(last_modified).strftime('%Y-%m-%d %H:%M:%S')}")
     return message
 
 
 def inactivity_pop_up(last_modified):
     inactivity_duration = time.time() - last_modified
-    message = f"""
-                    The scanner has been inactive for the last {inactivity_duration // 60} minutes.
-                    Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben."""
+    message = (f""
+               f"The scanner has been inactive for the last {inactivity_duration // 60} minutes.\n"
+               f"Der Scanner ist in den letzten {inactivity_duration // 60} Minuten inaktiv geblieben.")
     write_message_file(message)
     try:
         # Trigger the Windows Task Scheduler to run the task

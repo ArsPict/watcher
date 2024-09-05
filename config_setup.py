@@ -35,7 +35,11 @@ def setup_config():
         'APP_TOKEN': config.get('Pushover', 'APP_TOKEN')
     }
 
-    return paths, app_settings, pushover_credentials
+    scanner = {
+        'name': config.get('Scanner', 'name')
+    }
+
+    return paths, app_settings, pushover_credentials, scanner
 
 
 # Example usage
