@@ -21,7 +21,7 @@ def setup_config():
     config.read(config_file)
 
     paths = {
-        'path': config.get('Paths', 'path'),
+        'dirs': config.get('Paths', 'dirs').split(','),
         'message_file': config.get('Paths', 'message_file')
     }
 

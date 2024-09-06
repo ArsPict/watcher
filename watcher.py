@@ -22,7 +22,7 @@ logging.basicConfig(
 
 try:
     paths, app_settings, pushover, scanner_info = setup_config()
-    path = paths['path']
+    dirs = paths['dirs']
     message_file = paths['message_file']
     inactivity_duration = app_settings['inactivity_duration']
     app_name = app_settings['app_name']
@@ -185,12 +185,14 @@ if __name__ == "__main__":
             if is_app_running(app_name):
                 if not observer_started:
                     observer = Observer()
-                    observer.schedule(event_handler, path, recursive=True)
+                    for path in dirs:
+                        observer.schedule(event_handler, path, recursive=True)
+                        logging.info(f"Started monitoring {path} because {app_name} is running.")
+                        print(f"Started monitoring {path} because {app_name} is running.")
                     observer.start()
                     observer_started = True
                     event_handler.last_modified = time.time()
-                    logging.info(f"Started monitoring {path} because {app_name} is running.")
-                    print(f"Started monitoring {path} because {app_name} is running.")
+
             else:
                 if observer_started:
                     observer.stop()
