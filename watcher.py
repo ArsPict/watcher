@@ -23,28 +23,29 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
-try:
-    paths, app_settings, pushover, scanner_info = setup_config()
-    dirs = paths['dirs']
-    message_file = paths['message_file']
-    inactivity_duration = app_settings['inactivity_duration']
-    app_name = app_settings['app_name']
-    USER_KEY = pushover['USER_KEY']
-    APP_TOKEN = pushover['APP_TOKEN']
-    send_notification = bool(int(pushover['send_notification']))
-    scanner_name = scanner_info['name']
-    # Access the constants
-    print("Paths:", paths)
-    print("App Settings:", app_settings)
-    #print("Pushover Credentials:", pushover_credentials)
+paths, app_settings, pushover, scanner_info = setup_config()
+dirs = paths['dirs']
+message_file = paths['message_file']
+last_mod_file = paths['last_mod_file']
 
-except Exception as e:
-    print(f"Error: {str(e)}")
+inactivity_duration = app_settings['inactivity_duration']
+app_name = app_settings['app_name']
+tick = app_settings['tick']
+
+USER_KEY = pushover['USER_KEY']
+APP_TOKEN = pushover['APP_TOKEN']
+send_notification = bool(int(pushover['send_notification']))
+
+scanner_name = scanner_info['name']
+
+# Access the constants
+print("Paths:", paths)
+print("App Settings:", app_settings)
+#print("Pushover Credentials:", pushover_credentials)
 
 
 def send_pushover_notification(message):
-    message = "test notification, please ignore \n" + message  # temporary
-    print(f"message sent: {message}")  # temporary
+    print(f"message sent: {message}")
     url = "https://api.pushover.net/1/messages.json"
     data = {
         'token': APP_TOKEN,
@@ -77,6 +78,8 @@ class MyHandler(FileSystemEventHandler):
             self.reaction_on_resume()
         self.at_work = True
         self.last_modified = time.time()
+        with open(last_mod_file, "w") as f:
+            f.write(str(self.last_modified))
         self.hms_time = datetime.now().strftime("%H:%M:%S")
 
     def on_modified(self, event: FileSystemEvent) -> None:
@@ -162,13 +165,16 @@ def inactivity_pop_up(last_modified):
         logger.error("Error triggering Task Scheduler: %s", str(e))
 
 
-def work_resumed_notify(last_modified):
+def work_resumed_notify():
     current_time = time.time()
+    with open(last_mod_file, "r") as f:
+        last_modified = float(f.read())
     inactivity_duration = timedelta(seconds=current_time - last_modified)
     inactivity_duration_without_microseconds = inactivity_duration - timedelta(
         microseconds=inactivity_duration.microseconds)
 
     message = (
+        f"{scanner_name}"
         f"Aktivität wieder aufgenommen\n"
         f"Inactivitätszeitraum: {datetime.fromtimestamp(last_modified).strftime('%Y-%m-%d %H:%M')} - "
         f"{datetime.fromtimestamp(current_time).strftime('%Y-%m-%d %H:%M')}\n"
@@ -180,8 +186,6 @@ def work_resumed_notify(last_modified):
     logger.info(message)
 
 def signal_handler(sig, frame):
-    #message = f"Script was stopped by signal {sig} at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}."
-    #send_pushover_notification(message)
     m = "Shutting down..."
     print(m)
     logger.info(m)
@@ -198,7 +202,7 @@ if __name__ == "__main__":
     observer = Observer()
     event_handler = MyHandler(timeout=inactivity_duration,
                               reaction=lambda: inactivity_alert(event_handler.last_modified),
-                              reaction2=lambda: work_resumed_notify(event_handler.last_modified))
+                              reaction2=lambda: work_resumed_notify())
 
     observer_started = False
 
@@ -226,12 +230,13 @@ if __name__ == "__main__":
                     observer.join()
                     observer_started = False
                     event_handler.at_work = False
-                    logger.info(f"Stopped monitoring {path} because {app_name} is not running.")
-                    print(f"Stopped monitoring {path} because {app_name} is not running.")
+                    for path in dirs:
+                        logger.info(f"Stopped monitoring {path} because {app_name} is not running.")
+                        print(f"Stopped monitoring {path} because {app_name} is not running.")
             if observer_started:
                 event_handler.check_inactivity()
 
-            time.sleep(5)  # Check every 5 seconds
+            time.sleep(tick)  # Check every 5 seconds
     except KeyboardInterrupt:
         signal_handler(signal.SIGINT, None)
     finally:

@@ -22,12 +22,14 @@ def setup_config():
 
     paths = {
         'dirs': config.get('Paths', 'dirs').split(','),
-        'message_file': config.get('Paths', 'message_file')
+        'message_file': config.get('Paths', 'message_file'),
+        'last_mod_file': config.get('Paths', 'last_mod_file')
     }
 
     app_settings = {
         'app_name': config.get('App', 'app_name'),
-        'inactivity_duration': config.getint('App', 'inactivity_duration')
+        'inactivity_duration': config.getint('App', 'inactivity_duration'),
+        'tick': config.getint('App', 'tick')
     }
 
     pushover = {
