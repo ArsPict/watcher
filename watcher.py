@@ -69,7 +69,11 @@ class MyHandler(FileSystemEventHandler):
         self.timeout = timeout
         self.reaction = reaction
         self.reaction_on_resume = reaction2
-        self.last_modified = time.time()
+        if os.path.exists(last_mod_file):
+            with open(last_mod_file, "r") as f:
+                self.last_modified = float(f.read())
+        else:
+            self.last_modified = time.time()
         self.at_work = False
         self.hms_time = datetime.now().strftime("%H:%M:%S")
 
@@ -175,7 +179,7 @@ def work_resumed_notify():
             microseconds=inactivity_duration.microseconds)
 
         message = (
-            f"{scanner_name}"
+            f"{scanner_name}\n"
             f"Aktivität wieder aufgenommen\n"
             f"Inactivitätszeitraum: {datetime.fromtimestamp(last_modified).strftime('%Y-%m-%d %H:%M')} - "
             f"{datetime.fromtimestamp(current_time).strftime('%Y-%m-%d %H:%M')}\n"
