@@ -191,6 +191,8 @@ def work_resumed_notify():
         message = f"notification not sent: {last_mod_file} does not exist"
     print(message)
     logger.info(message)
+
+
 def signal_handler(sig, frame):
     m = "Shutting down..."
     print(m)
