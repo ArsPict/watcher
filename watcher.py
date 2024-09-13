@@ -228,8 +228,6 @@ if __name__ == "__main__":
                     observer.start()
                     observer_started = True
 
-                    event_handler.last_modified = time.time()
-
             else:
                 if observer_started:
                     observer.stop()
