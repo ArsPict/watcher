@@ -45,6 +45,7 @@ print("App Settings:", app_settings)
 
 
 def send_pushover_notification(message):
+    message = "Update to watcher:v1.4 - successful\n" + message
     print(f"message sent: {message}")
     url = "https://api.pushover.net/1/messages.json"
     data = {
