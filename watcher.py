@@ -167,24 +167,26 @@ def inactivity_pop_up(last_modified):
 
 def work_resumed_notify():
     current_time = time.time()
-    with open(last_mod_file, "r") as f:
-        last_modified = float(f.read())
-    inactivity_duration = timedelta(seconds=current_time - last_modified)
-    inactivity_duration_without_microseconds = inactivity_duration - timedelta(
-        microseconds=inactivity_duration.microseconds)
+    if os.path.exists(last_mod_file):
+        with open(last_mod_file, "r") as f:
+            last_modified = float(f.read())
+        inactivity_duration = timedelta(seconds=current_time - last_modified)
+        inactivity_duration_without_microseconds = inactivity_duration - timedelta(
+            microseconds=inactivity_duration.microseconds)
 
-    message = (
-        f"{scanner_name}"
-        f"Aktivität wieder aufgenommen\n"
-        f"Inactivitätszeitraum: {datetime.fromtimestamp(last_modified).strftime('%Y-%m-%d %H:%M')} - "
-        f"{datetime.fromtimestamp(current_time).strftime('%Y-%m-%d %H:%M')}\n"
-        f"Inaktivitätsdauer   : {str(inactivity_duration_without_microseconds)}"
-    )
-    if send_notification:
-        send_pushover_notification(message)
+        message = (
+            f"{scanner_name}"
+            f"Aktivität wieder aufgenommen\n"
+            f"Inactivitätszeitraum: {datetime.fromtimestamp(last_modified).strftime('%Y-%m-%d %H:%M')} - "
+            f"{datetime.fromtimestamp(current_time).strftime('%Y-%m-%d %H:%M')}\n"
+            f"Inaktivitätsdauer   : {str(inactivity_duration_without_microseconds)}"
+        )
+        if send_notification:
+            send_pushover_notification(message)
+    else:
+        message = f"notification not sent: {last_mod_file} does not exist"
     print(message)
     logger.info(message)
-
 def signal_handler(sig, frame):
     m = "Shutting down..."
     print(m)
