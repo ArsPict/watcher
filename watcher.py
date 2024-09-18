@@ -45,7 +45,7 @@ print("App Settings:", app_settings)
 
 
 def send_pushover_notification(message):
-    message += "\nwatcher:v1.5"
+    message += "\nwatcher:v1.6"
     print(f"message sent: {message}")
     url = "https://api.pushover.net/1/messages.json"
     data = {
@@ -143,8 +143,8 @@ def is_app_running(app_name):
 
 
 def inactivity_alert(last_modified):
-    if send_notification:
-        send_pushover_notification(inactivity_message(last_modified))
+    # if send_notification:
+    #     send_pushover_notification(inactivity_message(last_modified))
     inactivity_pop_up(last_modified)
 
 
@@ -178,16 +178,16 @@ def work_resumed_notify():
         inactivity_duration = timedelta(seconds=current_time - last_modified)
         inactivity_duration_without_microseconds = inactivity_duration - timedelta(
             microseconds=inactivity_duration.microseconds)
-
-        message = (
-            f"{scanner_name}\n"
-            f"Aktivität wieder aufgenommen\n"
-            f"Inactivitätszeitraum: {datetime.fromtimestamp(last_modified).strftime('%Y-%m-%d %H:%M')} - "
-            f"{datetime.fromtimestamp(current_time).strftime('%Y-%m-%d %H:%M')}\n"
-            f"Inaktivitätsdauer   : {str(inactivity_duration_without_microseconds)}"
-        )
-        if send_notification:
-            send_pushover_notification(message)
+        if inactivity_duration.total_seconds() > 600:
+            message = (
+                f"{scanner_name}\n"
+                f"Aktivität wieder aufgenommen\n"
+                f"Inactivitätszeitraum: {datetime.fromtimestamp(last_modified).strftime('%Y-%m-%d %H:%M')} - "
+                f"{datetime.fromtimestamp(current_time).strftime('%Y-%m-%d %H:%M')}\n"
+                f"Inaktivitätsdauer   : {str(inactivity_duration_without_microseconds)}"
+            )
+            if send_notification:
+                send_pushover_notification(message)
     else:
         message = f"notification not sent: {last_mod_file} does not exist"
     print(message)
