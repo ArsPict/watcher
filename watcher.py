@@ -172,6 +172,7 @@ def inactivity_pop_up(last_modified):
 
 def work_resumed_notify():
     current_time = time.time()
+    message = ""
     if os.path.exists(last_mod_file):
         with open(last_mod_file, "r") as f:
             last_modified = float(f.read())
@@ -190,8 +191,10 @@ def work_resumed_notify():
                 send_pushover_notification(message)
     else:
         message = f"notification not sent: {last_mod_file} does not exist"
-    print(message)
-    logger.info(message)
+
+    if len(message) > 0:
+        print(message)
+        logger.info(message)
 
 
 def signal_handler(sig, frame):
